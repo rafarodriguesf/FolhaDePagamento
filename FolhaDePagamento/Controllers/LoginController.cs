@@ -54,7 +54,6 @@ namespace FolhaDePagamento.Controllers
 
 			if (loginDB == null)
 			{
-				// Usuário não encontrado, lidar com isso de acordo (por exemplo, redirecionar para uma página de erro ou exibir uma mensagem)
 				return RedirectToAction("UsuarioNaoEncontrado", "Erro");
 			}
 
@@ -65,18 +64,13 @@ namespace FolhaDePagamento.Controllers
 			{
 				var nomeFuncionario = await _loginRepositorio.ObterNomeFuncionarioPorLoginId(loginDB.Id);
 				ViewBag.NomeFuncionario = nomeFuncionario;
-				// Gravando usuário logado na sessão
-				//HttpContext.Session.SetString("_Usuario", nomeFuncionario);
 				HttpContext.Session.SetString(SessionKeyUser, nomeFuncionario);
 				HttpContext.Session.SetInt32(SessionKeyId, (int)loginDB.FuncionarioId);
-
 
 				return await Task.FromResult(RedirectToAction("Index", "Home"));
 			}
 
-
 			return await Task.FromResult(View());
-
 		}
 
 		[HttpPost]
@@ -91,9 +85,6 @@ namespace FolhaDePagamento.Controllers
 
 			return await Task.FromResult(RedirectToAction("Index", "Login"));
 		}
-
-
-
 
 		[HttpPost]
 		public async Task<IActionResult> Alterar(LoginModel login, string senhaAtual, string novaSenha)

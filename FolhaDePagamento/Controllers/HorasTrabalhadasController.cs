@@ -30,18 +30,6 @@ namespace FolhaDePagamento.Controllers
 
 			return RedirectToAction("Index", "Home");
 		}
-		//public async Task<IActionResult> Index()
-		//{
-		//	var funcionarioId = HttpContext.Session.GetInt32(SessionKeyId);
-
-		//	if (funcionarioId != null)
-		//	{
-		//		List<HorasTrabalhadasModel> horas = await _HorasTrabalhadasRepositorio.ListarHorasPorFuncionario((int)funcionarioId);
-		//		return View(horas);
-		//	}
-		//	return await Task.FromResult(RedirectToAction("Index", "Home"));
-		//}
-
 		public async Task<IActionResult> Index(int? mes, int? ano)
 		{
 			var funcionarioId = HttpContext.Session.GetInt32(SessionKeyId);
@@ -78,12 +66,6 @@ namespace FolhaDePagamento.Controllers
 
 			return View(horasFuncionario);
 		}
-
-
-
-
-
-
 		public IActionResult ListarHorasFuncionario()
 		{
 			var funcionarioId = HttpContext.Session.GetInt32(LoginController.SessionKeyId);
@@ -94,7 +76,6 @@ namespace FolhaDePagamento.Controllers
 			}
 			else
 			{
-				// Lógica para lidar com a ausência do ID do funcionário na sessão
 				return RedirectToAction("Usuario nao encontrado", "Erro");
 			}
 		}

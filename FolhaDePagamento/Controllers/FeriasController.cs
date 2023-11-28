@@ -112,6 +112,7 @@ namespace FolhaDePagamento.Controllers
 				{
 					model.ValorFerias = cargo.SalarioBase;
 				}
+
 				model.FuncionarioId = Convert.ToInt32(funcionarioId);
 				model.DataSolicitacao = DateTime.Now;
 				model.Status = "Pendente";

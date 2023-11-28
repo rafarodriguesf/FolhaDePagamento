@@ -26,17 +26,7 @@ namespace FolhaDePagamento.Repository
 			await _bancoContext.SaveChangesAsync();
 			return await Task.FromResult(login);
 		}
-		//public async Task<string> ObterNomeFUncionario(int funcionarioid)
-		//{
-
-
-		//	string query = $"SELECT Nome FROM Funcionario WHERE Id = {funcionarioid}";
-
-		//	var nomeFuncionario = await _bancoContext.Database.ExecuteSqlRawAsync(query);
-
-		//	return nomeFuncionario.ToString(); // Retorna o resultado da consulta como string
-		//}
-
+		
 		public async Task<LoginModel> ListarPorId(long id)
 		{
 			return await _bancoContext.Login.FirstOrDefaultAsync(l =>
