@@ -1,0 +1,36 @@
+﻿@model FeriasModel
+@{
+	ViewData["Title"] = "Solicitar Férias";
+
+}
+
+<h1 class="display-4 text-center mx-auto"> Cadastro de Solicitação de Férias</h1>
+<div class="text-center mx-auto col-4">
+    <form asp-controller="Ferias" asp-action="Criar" method="post" class="col">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row mt-4">
+            
+            <div class="col-sm-6">
+                <label for="datainicio" class="form-label">Data de Início</label>
+                <input type="date" asp-for="DataInicio" class="form-control" id="datainicio">
+                <span asp-validation-for="DataInicio" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6">
+                <label for="datafim" class="form-label">Data de Fim</label>
+                <input type="date" asp-for="DataFim" class="form-control" id="datafim">
+                <span asp-validation-for="DataFim" class="text-danger"></span>
+            </div>
+        </div>
+           
+
+        <div class="row col-6 mt-5 mx-auto">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary btn-block">Solicitar Férias</button>
+            </div>
+            <div class="col-sm-6">
+                <a class="btn btn-secondary btn-block" asp-controller="Ferias" asp-action="Index" role="button">Voltar</a>
+            </div>
+        </div>
+    </form>
+</div>

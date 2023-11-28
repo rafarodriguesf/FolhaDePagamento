@@ -1,0 +1,52 @@
+﻿﻿@using System.Globalization;
+@using FolhaDePagamento.Controllers;
+@model List<HorasTrabalhadasModel>
+@{
+	ViewData["Title"] = "Banco de Horas";
+}
+
+<div class="text-center">
+
+	<h1 class="display-4"> Banco de Horas</h1>
+
+	@if (Model != null && Model.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Data</th>
+					<th>Hora de Entrada</th>
+					<th>Hora de Saída</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var hora in Model)
+				{
+					<tr>
+						<th scope="row">@hora.DataHorasTrabalhadas.ToString("dd/MM/yyyy")</th>
+						<td>@hora.HoraEntrada</td>
+						<td>@hora.HoraSaida</td>
+					</tr>
+				}
+
+			</tbody>
+		</table>
+
+		<a class="btn btn-outline-dark" asp-action="Index" asp-controller="HorasTrabalhadas"
+		   asp-route-mes="@ViewBag.MesAnterior" asp-route-ano="@ViewBag.AnoAnterior">Mês Anterior</a>
+
+		<a class="btn btn-outline-dark" asp-action="Index" asp-controller="HorasTrabalhadas"
+		   asp-route-mes="@ViewBag.MesSeguinte" asp-route-ano="@ViewBag.AnoSeguinte">Próximo Mês</a>
+	}
+	else
+	{
+		<p>Nenhuma hora registrada para este funcionário neste mês.</p>
+		<a class="btn btn-outline-dark" asp-action="Index" asp-controller="HorasTrabalhadas"
+		   asp-route-mes="@ViewBag.MesAnterior" asp-route-ano="@ViewBag.AnoAnterior">Mês Anterior</a>
+
+		<a class="btn btn-outline-dark" asp-action="Index" asp-controller="HorasTrabalhadas"
+		   asp-route-mes="@ViewBag.MesSeguinte" asp-route-ano="@ViewBag.AnoSeguinte">Próximo Mês</a>
+
+		
+	}
+</div>

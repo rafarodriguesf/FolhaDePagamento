@@ -1,0 +1,47 @@
+﻿﻿@using System.Globalization;
+@using FolhaDePagamento.Controllers;
+@model List<FeriasModel>
+@{
+    ViewData["Title"] = "Solicitações de Ferias";
+}
+
+<div class="text-center">
+	<br />
+	<h1 class="display-4"> Solicitações de Ferias Pendentes</h1>
+
+
+	@if (Model != null && Model.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Data de Solicitação</th>
+					<th>Data Inicio</th>
+					<th>Data Fim</th>
+					<th>Valor Ferias</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var ferias in Model)
+				{
+					<tr>
+						<th scope="row">@ferias.DataSolicitacao</th>
+						<td>@ferias.DataInicio.ToString("dd/MM/yyyy")</td>
+						<td>@ferias.DataFim.ToString("dd/MM/yyyy")</td>
+						<td>@ferias.ValorFerias</td>
+						<td>@ferias.Status</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>Nenhuma solicitação registrada </p>
+	}
+
+	<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+		<a class="btn btn-success" role="button" asp-controller="Ferias" asp-action="Criar">Solicitar Ferias</a>
+	</div>
+</div>
