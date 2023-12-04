@@ -30,41 +30,52 @@ namespace FolhaDePagamento.Controllers
 
 			return RedirectToAction("Index", "Home");
 		}
+
 		public async Task<IActionResult> Index(int? mes, int? ano)
 		{
+			
 			var funcionarioId = HttpContext.Session.GetInt32(SessionKeyId);
 
-			var dataReferencia = new DateTime(ano ?? DateTime.Today.Year, mes ?? DateTime.Today.Month, 1);
-
-			var mesAtual = dataReferencia.Month;
-			var anoAtual = dataReferencia.Year;
-
-			var mesAnterior = dataReferencia.AddMonths(-1).Month;
-			var anoAnterior = dataReferencia.AddMonths(-1).Year;
-
-			if (mesAtual == 1)
+			if (funcionarioId != null)
 			{
-				mesAnterior = 12;
-				anoAnterior = dataReferencia.Year - 1;
+				var dataReferencia = new DateTime(ano ?? DateTime.Today.Year, mes ?? DateTime.Today.Month, 1);
+
+				var mesAtual = dataReferencia.Month;
+				var anoAtual = dataReferencia.Year;
+
+				var mesAnterior = dataReferencia.AddMonths(-1).Month;
+				var anoAnterior = dataReferencia.AddMonths(-1).Year;
+
+				if (mesAtual == 1)
+				{
+					mesAnterior = 12;
+					anoAnterior = dataReferencia.Year - 1;
+				}
+
+				var proximoMes = dataReferencia.AddMonths(1).Month;
+				var proximoAno = dataReferencia.AddMonths(1).Year;
+
+				if (mesAtual == 12)
+				{
+					proximoMes = 1;
+					proximoAno = dataReferencia.Year + 1;
+				}
+
+				var horasFuncionario = await _HorasTrabalhadasRepositorio.ListarHorasPorMesAno((int)funcionarioId, mesAtual, anoAtual);
+
+				ViewBag.MesAnterior = mesAnterior;
+				ViewBag.AnoAnterior = anoAnterior;
+				ViewBag.MesSeguinte = proximoMes;
+				ViewBag.AnoSeguinte = proximoAno;
+
+				return View(horasFuncionario);
+			}
+			else
+			{
+				return RedirectToAction("Index", "Login");
 			}
 
-			var proximoMes = dataReferencia.AddMonths(1).Month;
-			var proximoAno = dataReferencia.AddMonths(1).Year;
-
-			if (mesAtual == 12)
-			{
-				proximoMes = 1;
-				proximoAno = dataReferencia.Year + 1;
-			}
-
-			var horasFuncionario = await _HorasTrabalhadasRepositorio.ListarHorasPorMesAno((int)funcionarioId, mesAtual, anoAtual);
-
-			ViewBag.MesAnterior = mesAnterior;
-			ViewBag.AnoAnterior = anoAnterior;
-			ViewBag.MesSeguinte = proximoMes;
-			ViewBag.AnoSeguinte = proximoAno;
-
-			return View(horasFuncionario);
+			
 		}
 		public IActionResult ListarHorasFuncionario()
 		{

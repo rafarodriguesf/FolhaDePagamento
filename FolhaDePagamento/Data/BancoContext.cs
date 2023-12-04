@@ -9,7 +9,6 @@ namespace FolhaDePagamento.Data
     {
         public BancoContext(DbContextOptions<BancoContext> options) : base(options)
         {
-
         }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,6 +30,7 @@ namespace FolhaDePagamento.Data
         public DbSet<CargoModel> Cargo { get; set; }
         public DbSet<HorasTrabalhadasModel> HorasTrabalhadas { get; set; }
         public DbSet<FeriasModel> Ferias { get; set; }
+        public DbSet<PagamentoModel> Pagamento { get; set; }
         
 	}
 }

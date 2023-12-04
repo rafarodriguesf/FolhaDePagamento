@@ -1,0 +1,40 @@
+﻿﻿@using System.Globalization;
+@using FolhaDePagamento.Controllers;
+@model List<PagamentoModel>
+@{
+    ViewData["Title"] = "Pagamentos";
+}
+
+<div class="text-center">
+    <br />
+
+    <h1 class="display-4">Meus Pagamentos</h1>
+    <h6>Lista de pagamentos mensais</h6>
+    <br />
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Data do Pagamento</th>
+                    <th>Valor do Pagamento</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var pag in Model)
+                {
+                    <tr>
+                        <th scope="row">@pag.DataPagamento.ToString("dd/MM/yyyy")</th>
+                        <td>@pag.ValorPago</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Nenhuma pagamento registrado </p>
+    }
+
+</div>

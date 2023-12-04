@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - Controle de Produtos</title>
+	<title>@ViewData["Title"] - Folha de Pagamentos</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -36,7 +36,16 @@
 									<a class="nav-link text-dark" asp-area="" asp-controller="Ferias" asp-action="Index">Solicitar Ferias</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link text-dark" asp-area="" asp-controller="HorasTrabalhadas" asp-action="Index">Banco de Horas</a>
+									<a class="nav-link text-dark" asp-area="" asp-controller="HorasTrabalhadas" asp-action="Index">Espelho de Ponto</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Meu Cadastro</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Pagamento" asp-action="Index">Pagamentos</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Editar" asp-route-id=@idUsuario>Alterar Senha</a>
 								</li>
 							}
 						</ul>
@@ -57,9 +66,9 @@
 									</span>
 								</li>
 								<li class="nav-item mx-3">
-									<a class="nav-link text-secondary" asp-area="" asp-controller="Login" asp-action="Editar" asp-route-id=@idUsuario>@usuario</a>
+									<h4 class="nav-link text-dark">Olá, @usuario</h4>
 								</li>
-								<li class="nav-item">
+								<li class="nav-item mx-3">
 									<a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="Sair">Sair</a>
 								</li>
 							}

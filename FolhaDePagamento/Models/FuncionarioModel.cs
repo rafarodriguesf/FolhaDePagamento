@@ -42,5 +42,6 @@ namespace FolhaDePagamento.Models
 
 		public ICollection<LoginModel> Logins { get; set; } = new List<LoginModel>();
 		public ICollection<FeriasModel> Ferias { get; set; } = new List<FeriasModel>();
+		public ICollection<PagamentoModel> Pagamentos { get; set; } = new List<PagamentoModel>();
 	}
 }

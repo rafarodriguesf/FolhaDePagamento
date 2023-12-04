@@ -2,12 +2,15 @@
 @using FolhaDePagamento.Controllers;
 @model List<HorasTrabalhadasModel>
 @{
-	ViewData["Title"] = "Banco de Horas";
+	ViewData["Title"] = "Espelho de Ponto";
 }
 
 <div class="text-center">
 
-	<h1 class="display-4"> Banco de Horas</h1>
+	<br />
+	<h1 class="display-4"> Espelho de Ponto</h1>
+	<h6> registro de entrada e saída</h6>
+	<br />
 
 	@if (Model != null && Model.Any())
 	{

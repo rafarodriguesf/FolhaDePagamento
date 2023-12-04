@@ -7,8 +7,9 @@
 
 <div class="text-center">
 	<br />
-	<h1 class="display-4"> Solicitações de Ferias Pendentes</h1>
-
+	<h1 class="display-4"> Solicitações de Ferias</h1>
+	<h6> minhas solicitações de férias </h6>
+	<br />
 
 	@if (Model != null && Model.Any())
 	{
@@ -42,6 +43,6 @@
 	}
 
 	<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-		<a class="btn btn-success" role="button" asp-controller="Ferias" asp-action="Criar">Solicitar Ferias</a>
+		<a class="btn btn-success" role="button" asp-controller="Ferias" asp-action="Criar"> + Solicitar Ferias</a>
 	</div>
 </div>

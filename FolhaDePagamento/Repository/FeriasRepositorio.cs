@@ -66,7 +66,7 @@ namespace FolhaDePagamento.Repository
 		{
 			// Consulta as férias do funcionário com status "Aprovado"
 			var feriasAprovadas = await _bancoContext.Ferias
-				.Where(f => f.FuncionarioId == funcionarioId && f.Status == "Aprovado")
+				.Where(f => f.FuncionarioId == funcionarioId && f.Status == "Aprovada")
 				.CountAsync();
 
 			return feriasAprovadas;

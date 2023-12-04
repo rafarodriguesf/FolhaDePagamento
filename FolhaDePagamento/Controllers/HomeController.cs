@@ -1,4 +1,5 @@
 ﻿using FolhaDePagamento.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
@@ -17,21 +18,24 @@ namespace FolhaDePagamento.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+		public IActionResult Index()
         {
             var usuario = HttpContext.Session.GetString(SessionKeyUser);
-            if (!usuario.IsNullOrEmpty())
+            if (usuario!= null)
             {
                 _logger.LogInformation("Session Name: {usuario}", usuario);
                 return View();
             }
-            return View();
+            else
+            {
+				return RedirectToAction("Index", "Login");
+			}
         }
 
 		public IActionResult Sair()
 		{
 			HttpContext.Session.Clear();
-			return RedirectToAction("Index");
+			return RedirectToAction("Index", "Login");
 		}
 
 		public IActionResult Privacy()

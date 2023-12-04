@@ -1,0 +1,34 @@
+﻿﻿@using System.Globalization;
+@using FolhaDePagamento.Controllers;
+@model List<FuncionarioModel>
+@{
+    ViewData["Title"] = "Dados Cadastrais";
+}
+
+<div class="text-center">
+
+    <br />
+    <h1 class="display-4"> Meu cadastro</h1>
+    <h6>dados cadastrados no sistema</h6>
+    <br />
+    @if (Model != null)
+    {
+        @foreach (var func in Model)
+        {
+            <br />
+            <h3>Dados pessoais</h3>
+            <h5>Nome: <small class="text-muted">@func.Nome</small></h5>
+            <h5>Telefone: <small class="text-muted">@func.Telefone</small></h5>
+            <h5>CPF: <small class="text-muted">@func.CPF</small></h5>
+            <h5>Data de nascimento: <small class="text-muted">@func.DataNasc.ToString("dd/MM/yyyy")</small></h5>
+            <h5>Data de admissão: <small class="text-muted">@func.DataAdmissao</small></h5>
+            <br />
+            <h3>Informações Báncarias</h3>
+            <h5>Instituicao: <small class="text-muted">@func.Instituicao</small></h5>
+            <h5>Agencia: <small class="text-muted">@func.Agencia</small></h5>
+            <h5>Conta corrente: <small class="text-muted">@func.ContaCorrente</small></h5>
+            
+            
+        }
+    }
+</div>

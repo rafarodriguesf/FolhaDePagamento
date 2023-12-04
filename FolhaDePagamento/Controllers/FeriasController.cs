@@ -32,7 +32,10 @@ namespace FolhaDePagamento.Controllers
 				List<FeriasModel> ferias = await _FeriasRepositorio.BuscarFeriasPorFuncionario((int)funcionarioId);
 				return View(ferias);
 			}
-			return await Task.FromResult(RedirectToAction("Index", "Home"));
+			else
+			{
+				return RedirectToAction("Index", "Login");
+			}
 		}
         public async Task<IActionResult> Criar()
         {
@@ -66,7 +69,14 @@ namespace FolhaDePagamento.Controllers
 				return View(ferias); // Retorna a view com o erro
 			}
 
-			var dataAdmissao = funcionario.DataAdmissao.Value.Date;
+            DateTime hoje = DateTime.Today;
+            if (hoje > datainicio)
+            {
+                ModelState.AddModelError("", "A data de início das férias deve ser posterior à data de hoje.");
+                return View(ferias); // Retorna a view com o erro
+            }
+
+            var dataAdmissao = funcionario.DataAdmissao.Value.Date;
 			var mesesDesdeAdmissaoAteFerias = ((datainicio.Year - dataAdmissao.Year) * 12) + datainicio.Month - dataAdmissao.Month;
 			if (mesesDesdeAdmissaoAteFerias < 12)
 			{
@@ -87,12 +97,7 @@ namespace FolhaDePagamento.Controllers
 				return View(ferias); // Retorna a view com o erro
 			}
 
-			DateTime hoje = DateTime.Today;
-			if (hoje > datainicio)
-			{
-				ModelState.AddModelError("", "A data de início das férias deve ser posterior à data de hoje.");
-				return View(ferias); // Retorna a view com o erro
-			}
+			
 			int anos = hoje.Year - dataAdmissao.Year;
 			if (hoje.Month < dataAdmissao.Month || (hoje.Month == dataAdmissao.Month && hoje.Day < dataAdmissao.Day))
 			{

@@ -1,9 +1,55 @@
 ﻿@{
-	ViewData["Title"] = "Home Page";
-	var usuario = Context.Session.GetString("_Usuario");
+    ViewData["Title"] = "Home Page";
+    var usuario = Context.Session.GetString("_Usuario");
 }
 
-<div class="text-center">
-	<h1 class="display-4">Sistema de Pagamentos</h1>
-	<p>Sistema de Folha de Pagamentos</p>
+<div class="text-center justify-content-center justify-content-sm-center">
+    <h1 class="display-4">Sistema de Pagamentos</h1>
+    <p>Sistema de Folha de Pagamentos</p>
+
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/img/profile.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Meus dados</h5>
+                    <p class="card-text">Visualize seus dados pessoais cadastrados na empresa.</p>
+                    <a asp-controller="Funcionario" asp-action="Index" class="btn btn-primary">Ver meu perfil</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/img/vacation.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Solicite suas Férias</h5>
+                    <p class="card-text">Solicite suas férias e acompanhe sua requisição por aqui.</p>
+                    <a asp-controller="Ferias" asp-action="Index" class="btn btn-primary">Visualizar Férias ></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/img/horast.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Espelho de Ponto</h5>
+                    <p class="card-text">Visualize o seu ponto com horario de entrada e saída do expediente.</p>
+                    <a asp-controller="HorasTrabalhadas" asp-action="Index" class="btn btn-primary">Ver Espelho de Ponto ></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/img/pagamentos.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Historico de Pagamentos</h5>
+                    <p class="card-text">Visualize o seu histórico de pagamentos mensais.</p>
+                    <a asp-controller="Pagamento" asp-action="Index" class="btn btn-primary">Ver Pagamentos ></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
