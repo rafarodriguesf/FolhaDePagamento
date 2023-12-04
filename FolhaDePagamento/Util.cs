@@ -15,8 +15,8 @@ namespace FolhaDePagamento
 			binReader.Close(); //dispose reader
 			return output;
 		}
-
-		internal static byte[]? ReadFully2(Func<string?> toString)
+        
+        internal static byte[]? ReadFully2(Func<string?> toString)
 		{
 			throw new NotImplementedException();
 		}

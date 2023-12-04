@@ -8,6 +8,7 @@ namespace FolhaDePagamento.Repository
 		Task<LoginModel> Adicionar(LoginModel login);
 		Task<LoginModel> ListarPorId(long id);
 		Task<LoginModel> ListarPorUsuario(string usuario);
+		Task<LoginModel> ListarPorEmail(string email);
 		Task<LoginModel> ListarPorUsuarioSenha(string usuario, string senha);
 		Task<string> ObterNomeFuncionarioPorLoginId(int loginId);
 		Task<LoginModel> Atualizar(LoginModel login);

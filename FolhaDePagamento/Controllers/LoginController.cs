@@ -3,6 +3,7 @@ using FolhaDePagamento.Models;
 using FolhaDePagamento.Repository;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Cryptography;
 
 namespace FolhaDePagamento.Controllers
@@ -54,13 +55,21 @@ namespace FolhaDePagamento.Controllers
 
 			if (loginDB == null)
 			{
-				return RedirectToAction("UsuarioNaoEncontrado", "Erro");
+				ViewBag.ErroLogin = "Login ou Senha incorreto. Tente novamente.";
+				return View(); // Retornando a view correta
 			}
 
-			if (senha != null && loginDB != null)
-				sucesso = true;
+			if (senha != null && loginDB.Senha == senha) 
+			{
+                sucesso = true;
+            }
+            else
+            {
+                ViewBag.ErroLogin = "Login ou Senha incorreto. Tente novamente.";
+                return View();
+            }
 
-			if (sucesso)
+            if (sucesso)
 			{
 				var nomeFuncionario = await _loginRepositorio.ObterNomeFuncionarioPorLoginId(loginDB.Id);
 				ViewBag.NomeFuncionario = nomeFuncionario;
@@ -69,6 +78,8 @@ namespace FolhaDePagamento.Controllers
 
 				return await Task.FromResult(RedirectToAction("Index", "Home"));
 			}
+
+
 
 			return await Task.FromResult(View());
 		}
@@ -90,18 +101,30 @@ namespace FolhaDePagamento.Controllers
 		public async Task<IActionResult> Alterar(LoginModel login, string senhaAtual, string novaSenha)
 		{
 			LoginModel loginDB = await _loginRepositorio.ListarPorId(login.Id);
+			LoginModel loginverificaDB = await _loginRepositorio.ListarPorUsuarioSenha(login.Usuario, senhaAtual);
+			var sucesso = false;
 
-			var sucesso = true;
+			if (loginverificaDB != null && loginverificaDB.Senha == senhaAtual)
+			{
+				sucesso = true;
+			}
+			else
+			{
+				ViewBag.ErroLogin = "Login ou Senha incorreto. Tente novamente.";
+				return View("Editar"); // Retornando a view correta
+			}
+
 			if (sucesso)
 			{
 				loginDB.Usuario = login.Usuario;
 				loginDB.Senha = novaSenha;
 				await _loginRepositorio.Atualizar(loginDB);
-				return await Task.FromResult(RedirectToAction("Sair", "Home"));
+				return RedirectToAction("Sair", "Home");
 			}
 
-			return await Task.FromResult(View());
+			return View("Editar"); // Retornando a view correta em caso de outra condição
 		}
+
 
 
 

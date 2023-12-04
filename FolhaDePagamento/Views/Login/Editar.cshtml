@@ -36,3 +36,10 @@
 		</div>
 	</form>
 </div>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErroLogin))
+{
+	<div class="alert alert-danger" role="alert">
+		@ViewBag.ErroLogin
+	</div>
+}

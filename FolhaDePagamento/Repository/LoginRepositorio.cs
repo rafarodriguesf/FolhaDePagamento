@@ -43,7 +43,12 @@ namespace FolhaDePagamento.Repository
 			return await _bancoContext.Login.FirstOrDefaultAsync(l => l.Usuario == usuario && l.Senha == senha);
 		}
 
-		public async Task<string> ObterNomeFuncionarioPorLoginId(int loginId)
+        public async Task<LoginModel> ListarPorEmail(string email)
+        {
+            return await _bancoContext.Login.FirstOrDefaultAsync(l => l.Usuario == email);
+        }
+
+        public async Task<string> ObterNomeFuncionarioPorLoginId(int loginId)
 		{
 			var login = await _bancoContext.Login.FindAsync(loginId);
 

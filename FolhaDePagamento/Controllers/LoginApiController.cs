@@ -1,5 +1,6 @@
 ﻿using FolhaDePagamento.Models;
 using FolhaDePagamento.Repository;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
@@ -22,11 +23,14 @@ namespace FolhaDePagamento.Controllers
 		[HttpGet]
 		async public Task<ActionResult<LoginModel>> Logar(string? usuario, string? senha)
 		{
-			LoginModel loginDB = await _loginRepositorio.ListarPorUsuario(usuario!);
+			LoginModel loginDB = await _loginRepositorio.ListarPorUsuarioSenha(usuario, senha);
 			var sucesso = false;
 
-			if (senha != null)
-				sucesso = true;
+			if (loginDB != null) 
+			{
+                sucesso = true;
+            }
+				
 
 			if (sucesso)
 			{
@@ -47,11 +51,14 @@ namespace FolhaDePagamento.Controllers
 		[HttpPost]
 		async public Task<ActionResult<LoginModel>> LogarPost(LoginUsuarioModel loginUsuarioModel)
 		{
-			LoginModel loginDB = await _loginRepositorio.ListarPorUsuario(loginUsuarioModel.usuario);
+			LoginModel loginDB = await _loginRepositorio.ListarPorUsuarioSenha(loginUsuarioModel.usuario,loginUsuarioModel.senha);
 			var sucesso = false;
 
-			if (loginUsuarioModel.senha != null)
-				sucesso = true;
+			if (loginDB != null) 
+			{ 
+				sucesso = true; 
+			}
+				
 
 			if (sucesso)
 			{
